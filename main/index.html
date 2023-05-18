@@ -1,18 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Find Your Favorite DnD Monster!</title>
-        <link type="text/css" rel="stylesheet" href="./index.css"/>
-        <script type="text/javascript" src="index.js"></script>
-    </head>
-    <body>
-        <main>
-            <label for="myInput">Enter a value:</label>
-            <input type="text" id="myInput" />
+  <head>
+    <meta charset="UTF-8" />
+    <title>Find Your Favorite DnD Monster!</title>
+    <link type="text/css" rel="stylesheet" href="./index.css" />
+    <script type="text/javascript" src="index.js"></script>
+  </head>
+  <body>
+    <main>
+      <label for="myInput">Enter a value:</label>
+      <input type="text" id="myInput" />
 
-            <button onclick="storeInputValue()">Store Value</button>
-            <section id="demo"></section>
-        </main>
-    </body>
+      <button onclick="storeInputValue()">Store Value</button>
+
+      <section id="demo"></section>
+    </main>
+
+    <template id="card-template">
+      <div class="card">
+        <h5 class="card-title"></h5>
+        <p><strong>Size: </strong><span class="card-size"></span></p>
+        <p><strong>Type: </strong><span class="card-type"></span></p>
+        <p><strong>Alignment: </strong><span class="card-alignment"></span></p>
+        <button class="like-button">Like</button>
+      </div>
+    </template>
+
+    <script>
+      let storedValue;
+      const cardTemplate = document.getElementById("card-template");
+
+      function storeInputValue() {
+        // Get the input element
+        let input = document.getElementById("myInput");
+
+        // Store the value in the global variable
+        storedValue = input.value;
+        useStoredValue();
+      }
+
+      function convertSpacesToDashes(str) {
+        return str.replace(/\s+/g, "-");
+      }
+
+      function useStoredValue() {
+        let lowerValue = storedValue.toLowerCase();
+        let newValue = convertSpacesToDashes(lowerValue);
+        let mydata = fetch(`https://api.open5e.com/monsters/${newValue}`)
+          .then((response) => response.json())
+          .then((data) => {
+            // Access the monster list from the data
+            console.log(data);
+            const element = data;
+            console.log(element);
+
+            // Create a new card with the retrieved monster's information
+            const newCard = cardTemplate.content.cloneNode(true);
+            newCard.querySelector(".card-title").textContent = element.name;
+            newCard.querySelector(".card-size").textContent = element.size;
+            newCard.querySelector(".card-type").textContent = element.type;
+            newCard.querySelector(".card-alignment").textContent =
+              element.alignment;
+
+            // Add a like button to the new card
+            const likeButton = newCard.querySelector(".like-button");
+            let likes = 0;
+            likeButton.addEventListener("click", () => {
+              likes++;
+              likeButton.textContent = `Like (${likes})`;
+            });
+
+            // Display the new card on the webpage
+            const demoSection = document.getElementById("demo");
+            demoSection.appendChild(newCard);
+
+            storedValue = "";
+            mydata = "";
+          })
+          .catch((error) => {
+            // Handle any errors that occur during the fetch request
+            console.error("Error:", error);
+          });
+      }
+    </script>
+  </body>
 </html>
