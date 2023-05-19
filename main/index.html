@@ -22,6 +22,7 @@
         <p><strong>Size: </strong><span class="card-size"></span></p>
         <p><strong>Type: </strong><span class="card-type"></span></p>
         <p><strong>Alignment: </strong><span class="card-alignment"></span></p>
+        <p><strong>Challenge Rating: </strong><span class="card-challenge_rating"></span></p>
         <button class="like-button">Like</button>
       </div>
     </template>
@@ -59,8 +60,8 @@
             newCard.querySelector(".card-title").textContent = element.name;
             newCard.querySelector(".card-size").textContent = element.size;
             newCard.querySelector(".card-type").textContent = element.type;
-            newCard.querySelector(".card-alignment").textContent =
-              element.alignment;
+            newCard.querySelector(".card-alignment").textContent = element.alignment;
+            newCard.querySelector(".card-challenge_rating").textContent = element.challenge_rating
 
             // Add a like button to the new card
             const likeButton = newCard.querySelector(".like-button");
