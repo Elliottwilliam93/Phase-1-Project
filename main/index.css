@@ -14,10 +14,11 @@
 .card-title{
     padding-top: 8px;
     font-size: 22px;
+    margin-bottom: 20px;
 }
 
 .card-details{
-    padding-top: 140px;
+    padding-top: 10px;
 }
 
 #demo{

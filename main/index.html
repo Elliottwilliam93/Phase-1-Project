@@ -60,25 +60,29 @@
             const element = data;
             console.log(element);
             let crSRC;
+
             if (element.challenge_rating <= 5 ) {
-              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels (2).png"
+              crSRC = '<img src="resources/diablo3-difficulty-levels (2).png" style="height: 150px; width: 150px; border-radius: 25px;">'
             }
             else if (element.challenge_rating <= 10 ) {
-              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels.png"
+              crSRC = '<img src="resources/diablo3-difficulty-levels.png" style="height: 150px; width: 150px; border-radius: 25px;">'
             }
             else if (element.challenge_rating <= 15 ) {
-              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels (3).png"
+              crSRC = '<img src="resources/diablo3-difficulty-levels (3).png" style="height: 150px; width: 150px; border-radius: 25px;">'
             }
             else {
-              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels%20(4).png"
+              crSRC = '<img src="resources/diablo3-difficulty-levels (4).png" style="height: 150px; width: 150px; border-radius: 25px;">'
             }
 
             // Create a new card with the retrieved monster's information
+            if(element.detail === "Not found.") {
+              alert("Monster Not Found!")
+            }else {
             const newCard = cardTemplate.content.cloneNode(true);
             newCard.querySelector(".card-title").textContent = element.name;
             newCard.querySelector(".card-size").textContent = element.size;
             newCard.querySelector(".card-type").textContent = element.type;
-            newCard.querySelector(".cr-img").innerHTML = `<img src=${crSRC}/>`
+            newCard.querySelector(".cr-img").innerHTML = crSRC
             newCard.querySelector(".card-alignment").textContent = element.alignment;
             newCard.querySelector(".card-challenge_rating").textContent = element.challenge_rating
             
@@ -93,13 +97,13 @@
             // Display the new card on the webpage
             const demoSection = document.getElementById("demo");
             demoSection.appendChild(newCard);
-
+          }
             storedValue = "";
             mydata = "";
           })
           .catch((error) => {
             // Handle any errors that occur during the fetch request
-            console.error("Error:", error);
+            
           });
       }
     </script>
