@@ -21,6 +21,7 @@
     <template id="card-template">
       <div class="card">
         <h5 class="card-title"></h5>
+        <div class="cr-img"></div>
         <div class="card-details">
           <p><strong>Size: </strong><span class="card-size"></span></p>
           <p><strong>Type: </strong><span class="card-type"></span></p>
@@ -58,15 +59,29 @@
             console.log(data);
             const element = data;
             console.log(element);
+            let crSRC;
+            if (element.challenge_rating <= 5 ) {
+              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels (2).png"
+            }
+            else if (element.challenge_rating <= 10 ) {
+              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels.png"
+            }
+            else if (element.challenge_rating <= 15 ) {
+              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels (3).png"
+            }
+            else {
+              crSRC = "wsl.localhost/Ubuntu/home/williamelliott/development/code/phase-1/phase-1-project/main/resources/diablo3-difficulty-levels%20(4).png"
+            }
 
             // Create a new card with the retrieved monster's information
             const newCard = cardTemplate.content.cloneNode(true);
             newCard.querySelector(".card-title").textContent = element.name;
             newCard.querySelector(".card-size").textContent = element.size;
             newCard.querySelector(".card-type").textContent = element.type;
+            newCard.querySelector(".cr-img").innerHTML = `<img src=${crSRC}/>`
             newCard.querySelector(".card-alignment").textContent = element.alignment;
             newCard.querySelector(".card-challenge_rating").textContent = element.challenge_rating
-
+            
             // Add a like button to the new card
             const likeButton = newCard.querySelector(".like-button");
             let likes = 0;
