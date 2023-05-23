@@ -48,3 +48,24 @@
     width: 700px;
     margin-bottom: 100px;
 }
+
+#comment-box{
+   align-items: center;
+    margin-left: 42.3%;
+    display: flex;
+    width: 400px;
+    background-color: black;
+    height: 50px;
+    border-radius: 25px;
+    margin-bottom: 100px;
+    color: maroon
+}
+#post:hover{
+    background-color: red;
+    align-items: flex-end;
+    color: maroon;
+}
+
+#post{
+    align-items: center;
+}

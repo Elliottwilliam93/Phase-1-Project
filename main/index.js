@@ -20,5 +20,5 @@ const backgroundImages = [
     setInterval(changeBackgroundImage, 10000); // change background image every 10 seconds
   
     // CSS transitions for fade effect
-    document.body.style.transition = 'background-image 1s ease-in-out';
+    document.body.style.transition = 'background-image 2s ease-in-out';
   });
