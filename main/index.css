@@ -32,7 +32,7 @@
     display: flex;
     width: 400px;
     background-color: black;
-    height: 125px;
+    height: 80px;
     border-radius: 25px;
     margin-bottom: 100px;
     color: maroon
@@ -49,23 +49,59 @@
     margin-bottom: 100px;
 }
 
-#comment-box{
-   align-items: center;
-    margin-left: 42.3%;
+.comment-section {
     display: flex;
-    width: 400px;
-    background-color: black;
-    height: 50px;
-    border-radius: 25px;
-    margin-bottom: 100px;
-    color: maroon
-}
-#post:hover{
-    background-color: red;
-    align-items: flex-end;
-    color: maroon;
-}
-
-#post{
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
-}
+    width: 10%;
+    margin: 0 auto;
+    margin-top: 30px;
+    padding: 20px;
+    background-color: black;
+    color: maroon;
+    border-radius: 25px;
+  }
+  
+  form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  label {
+    margin-right: 10px;
+  }
+  
+  textarea {
+    flex: 1;
+    min-width: 200px;
+    margin-right: 10px;
+  }
+  
+  button {
+    background-color: maroon;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 1px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  button:hover{
+    color: white;
+  }
+  
+  .comment-history {
+    width: 20%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: black;
+    color: maroon;
+    border-radius: 25px;
+  }

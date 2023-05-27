@@ -10,17 +10,22 @@
     <main>
       <h1 class="title">Welcome to DnD5E Monster Finder!</h1>
       <div class="search-bar">
-      <label for="myInput">Search Monster Here!</label>
-      <input type="text" id="myInput" />
-
-      <button onclick="storeInputValue()">Search</button>
+        <label for="myInput">Search Monster Here!</label>
+        <input type="text" id="myInput" />
+        <button onclick="storeInputValue()">Search</button>
       </div>
       <section id="demo"></section>
     </main>
-    <input type="text" id="comment-box" placeholder="Enter Comment">
-    <button id="post">Post</button>
-    <ul id="unordered">
-
+    <div class="comment-section">
+      <form>
+        <label for="comment">Leave a Comment:</label>
+        <textarea id="comment" name="comment"></textarea>
+        <button id="post" type="submit">Post</button>
+      </form>
+    </div>
+    <div class="comment-history">
+      <h3>Comments</h3>
+    </div>
     <template id="card-template">
       <div class="card">
         <h5 class="card-title"></h5>
@@ -40,10 +45,8 @@
       const cardTemplate = document.getElementById("card-template");
 
       function storeInputValue() {
-        // Get the input element
         let input = document.getElementById("myInput");
 
-        // Store the value in the global variable
         storedValue = input.value;
         useStoredValue();
       }
@@ -58,7 +61,6 @@
         let mydata = fetch(`https://api.open5e.com/monsters/${newValue}`)
           .then((response) => response.json())
           .then((data) => {
-            // Access the monster list from the data
             console.log(data);
             const element = data;
             console.log(element);
@@ -76,8 +78,6 @@
             else {
               crSRC = '<img src="resources/diablo3-difficulty-levels (4).png" style="height: 150px; width: 150px; border-radius: 25px;">'
             }
-
-            // Create a new card with the retrieved monster's information
             if(element.detail === "Not found.") {
               alert("Monster Not Found!")
             }else {
@@ -89,7 +89,6 @@
             newCard.querySelector(".card-alignment").textContent = element.alignment;
             newCard.querySelector(".card-challenge_rating").textContent = element.challenge_rating
             
-            // Add a like button to the new card
             const likeButton = newCard.querySelector(".like-button");
             let likes = 0;
             likeButton.addEventListener("click", () => {
@@ -97,27 +96,32 @@
               likeButton.textContent = `Like (${likes})`;
             });
 
-            // Display the new card on the webpage
             const demoSection = document.getElementById("demo");
             demoSection.appendChild(newCard);
           }
             storedValue = "";
             mydata = "";
           })
-          .catch((error) => {
-            // Handle any errors that occur during the fetch request
-            
+          .catch((error) => {           
           });
       }
-      const post= document.getElementById("post");
-       post.addEventListener("click", function(){
-       let commentBoxValue= document.getElementById("comment-box").value;
- 
-        let li = document.createElement("li");
-        let text = document.createTextNode(commentBoxValue);
-        li.appendChild(text);
-        document.getElementById("unordered").appendChild(li);
- 
+      const form = document.querySelector('.comment-section form');
+      const commentHistory = document.querySelector('.comment-history');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const comment = form.comment.value.trim();
+        if (!comment) return;
+
+        const commentElement = document.createElement('div');
+        commentElement.classList.add('comment');
+        commentElement.innerHTML = `
+          <p>${comment}</p>
+          <span>${new Date().toLocaleString()}</span>
+          `;
+        commentHistory.appendChild(commentElement);
+        form.reset();
       });
     </script>
   </body>

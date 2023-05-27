@@ -6,19 +6,18 @@ const backgroundImages = [
     'https://e0.pxfuel.com/wallpapers/145/280/desktop-wallpaper-dota-1-digital.jpg',
   ];
   
-  let backgroundImageIndex = 0;
+let backgroundImageIndex = 0;
   
-  function changeBackgroundImage() {
-    const currentImage = backgroundImages[backgroundImageIndex];
-    document.body.style.backgroundImage = `url(${currentImage})`;
-    document.body.style.backgroundSize = 'cover'; // set background size to cover
-    backgroundImageIndex = (backgroundImageIndex + 1) % backgroundImages.length;
-  }
+function changeBackgroundImage() {
+  const currentImage = backgroundImages[backgroundImageIndex];
+  document.body.style.backgroundImage = `url(${currentImage})`;
+  document.body.style.backgroundSize = 'cover';
+  backgroundImageIndex = (backgroundImageIndex + 1) % backgroundImages.length;
+}
   
-  document.addEventListener('DOMContentLoaded', function() {
-    changeBackgroundImage(); // set initial background image
-    setInterval(changeBackgroundImage, 10000); // change background image every 10 seconds
+document.addEventListener('DOMContentLoaded', function() {
+  changeBackgroundImage();
+  setInterval(changeBackgroundImage, 10000);
   
-    // CSS transitions for fade effect
-    document.body.style.transition = 'background-image 2s ease-in-out';
-  });
+  document.body.style.transition = 'background-image 2s ease-in-out';
+});
