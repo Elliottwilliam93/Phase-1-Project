@@ -105,3 +105,11 @@
     color: maroon;
     border-radius: 25px;
   }
+
+  .example-title{
+    color: maroon;
+    font-size: 22px;
+    background-color: black;
+    border-radius: 25px;
+    width: 365px;
+  }

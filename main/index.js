@@ -1,3 +1,36 @@
+fetch('https://api.open5e.com/monsters')
+  .then(response => response.json())
+  .then(data => {
+    const monsters = Array.isArray(data) ? data : data.results;
+    if (!Array.isArray(monsters)) {
+      throw new Error("Invalid response: monsters data is not an array");
+    }
+
+    const dragons = monsters.filter(obj => obj.type === "dragon");
+    if (dragons.length === 0) {
+      throw new Error("No dragons found in the data");
+    }
+
+    const dragonList = document.getElementById('dragon-list');
+    dragons.forEach(dragon => {
+      console.log(dragons)
+      const option = document.createElement('option');
+      option.value = dragon.name;
+      option.textContent = dragon.name;
+      dragonList.appendChild(option);
+    });
+
+    dragonList.addEventListener('change', () => {
+      const selectedDragonName = dragonList.value;
+      const selectedDragon = dragons.find(dragon => dragon.name === selectedDragonName);
+      if (selectedDragon) {
+        const newCard = createCard(selectedDragon);
+        demoSection.appendChild(newCard);
+      }
+    });
+  })
+  .catch(error => console.log(error));
+
 const backgroundImages = [
   'https://wallpaperaccess.com/full/117898.jpg',
   'https://wallpaperaccess.com/full/2077763.jpg',
